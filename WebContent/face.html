@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta name="viewport" content="width=device-width,initial-scale=1.0">
+		<link rel="stylesheet" href="css/bootstrap.css" />
+		<script src="js/bootstrap.js"></script>
+		<script src="js/jquery-1.11.2.js"></script>
+		<meta charset="UTF-8">
+		<title>Insert title here</title>
+		<script type="text/javascript">
+			window.onload = function() {
+				$("#listUsers").click(function() {
+					$.get("GetUsersServlet", { //
+ 						"" : ""
+					}, function(data) {
+						alert(1);
+						var json = eval("(" + data + ")");
+						alert("users:" + json.users);
+						//document.getElementById("users_msg")
+						writeToScreen("list users: " + json + json.users);
+					});
+				});
+
+				// $("#list_camara").click(function() {
+				// alert("list_camara");
+				// $.get("http://192.168.0.110:8000/nodes", {
+				// "" : ""
+				// }, function(data) {
+				// var json = eval("(" + data + ")");
+				// alert("cameras:" + json.nodes);
+				// });
+				// });
+			};
+
+		</script>
+
+	</head>
+	<body>
+		<a id="listUsers" href="#"> List Users</a>
+
+	</body>
+</html>

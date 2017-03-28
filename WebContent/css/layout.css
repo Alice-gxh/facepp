@@ -1,0 +1,32 @@
+@CHARSET "UTF-8";
+body { margin:0 auto; font-size:12px; font-family:Verdana; line-height:1.5; background-color: #ffffff}
+ul,dl,dd,h1,h2,h3,h4,h5,h6,form,p { padding:0; margin:0;}
+ul { list-style:none;}
+img { border:0px;}
+a { color:#05a; text-decoration:none;}
+a:hover { color:#f00;}
+
+/*header*/
+#header { height:70px; width:100%; background:#CCCCCC; margin-bottom:8px;}
+#nav { height:30px; width:900; background:#ffffff; margin-bottom:8px;}
+#nav ul {list-style: none; margin: 0px; padding: 0px;};
+#nav ul li{float:left;}
+#nav ul li a{ padding: 0px 8px; height: 26px; line-height: 26px; }
+#nav ul li a:hover{background:#333; color:#fff;}
+ 
+/*body*/
+#maincontent { width:900px; margin:0 auto; margin-bottom:8px;}
+
+#side { float:left; width:128px; height:500px; background:#dddddd;}
+#side ul{list-style: none; margin: 0px; padding: 0px}
+#side ul li{}
+#side ul li a{display: block; padding: 0px 8px; height: 26px; line-height: 26px;}
+#side ul li a:hover{background:#333; color:#fff;}
+#side ul li ul{background: #eeeeee;}
+
+#main { float:left; width:764px; height:600px; background:#FFFFFF;}
+
+/*footer*/
+#footer { height:70px;  text-align: center;}
+
+

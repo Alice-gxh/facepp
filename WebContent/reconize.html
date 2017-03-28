@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<meta charset="utf-8" />
+<title>reconize</title>
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<link rel="stylesheet" href="css/layout.css" />
+<link rel="stylesheet" href="css/bootstrap.css" />
+<script src="js/bootstrap.js"></script>
+<script src="js/jquery-1.11.2.js"></script>
+
+
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
+<script type="text/javascript">
+	var wsUri = "ws://192.168.0.110:8080/recognize"; // "ws://echo.websocket.org/";
+	var output;
+	function init() {
+		output = document.getElementById("output");
+		testWebSocket();
+	}
+
+	function onOpen(evt) {
+		writeToScreen("CONNECTED");
+		doSend("WebSocket rocks");
+	}
+
+	function onClose(evt) {
+		writeToScreen("DISCONNECTED");
+	}
+
+	function onMessage(evt) {
+	//	writeTsScreen('------------------------------------------------------------');
+		writeToScreen('<span style="color: blue;">RESPONSE: ' + evt.data + '</span>');
+		var json = eval('(' + evt.data + ')');
+		
+		var imgStr = json.image;
+		//$("#img").attr("src", "data:image/jpeg;base64,"+imgStr);
+		var aPhoto = new Image();
+		
+		writeToScreen("location:'"+json.location
+			+"',photo_id:'"+json.photo_id
+			+"',timestamp:'"+json.timestamp
+			+"',user_id:'"+json.user_id+"'");
+	}
+
+	function onError(evt) {
+		writeToScreen('<span style="color: red;">ERROR:</span> ' + evt.data);
+	}
+
+	function doSend(message) {
+		writeToScreen("SENT: " + message);
+		websocket.send(message);
+	}
+
+	function writeToScreen(message) {
+		var pre = document.createElement("p");
+		pre.style.wordWrap = "break-word";
+		pre.innerHTML = message;
+		output.appendChild(pre);
+	}
+	
+	function testWebSocket() {
+		websocket = new WebSocket(wsUri);
+		websocket.onopen = function(evt) {
+			onOpen(evt)
+		};
+		websocket.onclose = function(evt) {
+			onClose(evt)
+		};
+		websocket.onmessage = function(evt) {
+			onMessage(evt)
+		};
+		websocket.onerror = function(evt) {
+			onError(evt)
+		};
+	}
+
+	window.addEventListener("load", init, false); 
+</script>
+<h2>reconize</h2><div id="output"> </div>
+<!-- 
+<img id="img" src="">  -->
